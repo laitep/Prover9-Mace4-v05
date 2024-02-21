@@ -525,7 +525,7 @@ class P9_options:
         [None, None, None, None, Flag, 'breadth_first', None, 0, None, 'Selection by age only (except for hints).'],
         [None, None, None, None, Flag, 'lightest_first', None, 0, None, 'Selection by weight only (except for hints).'],
         [None, None, None, None, Flag, 'random_given', None, 0, None, 'Random selection (except for hints).'],
-#        [None, None, None, None, Flag, 'default_parts', None, 1, None, 'Give all the selection parts their default values.'],
+#       [None, None, None, None, Flag, 'default_parts', None, 1, None, 'Give all the selection parts their default values.'],
 
         [None, None, None, None, Group, 'Semantic Guidance', 'left'],
         [None, None, None, None, Stringparm, 'multiple_interps', None, 'false_in_all', ['false_in_all', 'false_in_some'], 'Semantics with multiple interpretaions: determines how clauses are marked as "false".'],
@@ -668,48 +668,41 @@ class P9_options:
         (('ur_resolution', False), ('neg_ur_resolution', False)),
         (('lex_dep_demod', False), ('lex_dep_demod_lim', 0)),
         (('lex_dep_demod', True), ('lex_dep_demod_lim', 11)),
-
-        (('pick_given_ratio', '>=0'), ('age_part', 1)),
-        (('pick_given_ratio', '>=0'), ('weight_part', ('multiply', 1))),
-        (('pick_given_ratio', '>=0'), ('false_part', 0)),
-        (('pick_given_ratio', '>=0'), ('true_part', 0)),
-        (('pick_given_ratio', '>=0'), ('random_part', 0)),
-
-        (('breadth_first', True), ('age_part', 1)),
-        (('breadth_first', True), ('weight_part', 0)),
-        (('breadth_first', True), ('false_part', 0)),
-        (('breadth_first', True), ('true_part', 0)),
-        (('breadth_first', True), ('random_part', 0)),
-#        (('breadth_first', False), ('default_parts', True)),
-
         (('lightest_first', True), ('weight_part', 1)),
         (('lightest_first', True), ('age_part', 0)),
         (('lightest_first', True), ('false_part', 0)),
         (('lightest_first', True), ('true_part', 0)),
         (('lightest_first', True), ('random_part', 0)),
-#        (('lightest_first', False), ('default_parts', True)),
-
+#       (('lightest_first', False), ('default_parts', 'default')),
         (('random_given', True), ('weight_part', 0)),
         (('random_given', True), ('age_part', 0)),
         (('random_given', True), ('false_part', 0)),
         (('random_given', True), ('true_part', 0)),
         (('random_given', True), ('random_part', 1)),
-#        (('random_given', False), ('default_parts', True)),
-
+#        (('random_given', False), ('default_parts', 'default')),
+        (('pick_given_ratio', '>=0'), ('age_part', 1)),
+        (('pick_given_ratio', '>=0'), ('weight_part', ('multiply', 1))),
+        (('pick_given_ratio', '>=0'), ('false_part', 0)),
+        (('pick_given_ratio', '>=0'), ('true_part', 0)),
+        (('pick_given_ratio', '>=0'), ('random_part', 0)),
+        (('breadth_first', True), ('age_part', 1)),
+        (('breadth_first', True), ('weight_part', 0)),
+        (('breadth_first', True), ('false_part', 0)),
+        (('breadth_first', True), ('true_part', 0)),
+        (('breadth_first', True), ('random_part', 0)),
+#        (('breadth_first', False), ('default_parts', 'default')),
 #        (('default_parts', True), ('hints_part', sys.maxint)),
 #        (('default_parts', True), ('age_part', 1)),
 #        (('default_parts', True), ('weight_part', 0)),
 #        (('default_parts', True), ('false_part', 4)),
 #        (('default_parts', True), ('true_part', 4)),
 #        (('default_parts', True), ('random_part', 0)),
-
 #        (('default_parts', False), ('hints_part', 0)),
 #        (('default_parts', False), ('age_part', 0)),
 #        (('default_parts', False), ('weight_part', 0)),
 #        (('default_parts', False), ('false_part', 0)),
 #        (('default_parts', False), ('true_part', 0)),
 #        (('default_parts', False), ('random_part', 0)),
-
 #        (('default_output', True), ('quiet', False)),
 #        (('default_output', True), ('echo_input', True)),
 #        (('default_output', True), ('print_initial_clauses', True)),
@@ -795,56 +788,23 @@ class P9_options:
 
         ]
 
-    special_dependencies  = [
+    dependencies += [
         # These are extra dependencies so that the GUI makes sense.
         # They are irrelevant to Prover9 because they change meta options only,
         # which Prover9 will ignore.
-        # These are placed before the ordinary dependencies so that
-        # they can be overridden.
         
-#        (('breadth_first', True), ('default_parts', False)),
         (('breadth_first', True), ('lightest_first', False)),
         (('breadth_first', True), ('random_given', False)),
-        (('breadth_first', True), ('pick_given_ratio', 'default')),
-
-        (('breadth_first', False), ('age_part', 'default')),
-        (('breadth_first', False), ('weight_part', 'default')),
-        (('breadth_first', False), ('false_part', 'default')),
-        (('breadth_first', False), ('true_part', 'default')),
-        (('breadth_first', False), ('random_part', 'default')),
-
-#        (('lightest_first', True), ('default_parts', False)),
+        (('breadth_first', True), ('pick_given_ratio', -1)),
         (('lightest_first', True), ('breadth_first', False)),
         (('lightest_first', True), ('random_given', False)),
-        (('lightest_first', True), ('pick_given_ratio', 'default')),
-
-        (('lightest_first', False), ('age_part', 'default')),
-        (('lightest_first', False), ('weight_part', 'default')),
-        (('lightest_first', False), ('false_part', 'default')),
-        (('lightest_first', False), ('true_part', 'default')),
-        (('lightest_first', False), ('random_part', 'default')),
-
-#        (('random_given', True), ('default_parts', False)),
+        (('lightest_first', True), ('pick_given_ratio', -1)),
         (('random_given', True), ('lightest_first', False)),
         (('random_given', True), ('breadth_first', False)),
-        (('random_given', True), ('pick_given_ratio', 'default')),
-
-        (('random_given', False), ('age_part', 'default')),
-        (('random_given', False), ('weight_part', 'default')),
-        (('random_given', False), ('false_part', 'default')),
-        (('random_given', False), ('true_part', 'default')),
-        (('random_given', False), ('random_part', 'default')),
-
-#        (('pick_given_ratio', '>=0'), ('default_parts', False)),
+        (('random_given', True), ('pick_given_ratio', -1)),
         (('pick_given_ratio', '>=0'), ('breadth_first', False)),
         (('pick_given_ratio', '>=0'), ('lightest_first', False)),
         (('pick_given_ratio', '>=0'), ('random_given', False)),
-
-        (('pick_given_ratio', -1), ('age_part', 'default')),
-        (('pick_given_ratio', -1), ('weight_part', 'default')),
-        (('pick_given_ratio', -1), ('false_part', 'default')),
-        (('pick_given_ratio', -1), ('true_part', 'default')),
-        (('pick_given_ratio', -1), ('random_part', 'default')),
 
         (('max_minutes', '>=0'), ('max_hours', -1)),
         (('max_minutes', '>=0'), ('max_days', -1)),
@@ -853,8 +813,6 @@ class P9_options:
         (('max_days', '>=0'), ('max_minutes', -1)),
         (('max_days', '>=0'), ('max_hours', -1))
         ]
-
-    dependencies = special_dependencies + dependencies
 
     def __init__(self, parent):
         """ Use the option_set table to build a dictionary, indexed by

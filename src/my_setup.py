@@ -80,7 +80,7 @@ class Input_panel(wx.Panel):
         sub_sizer.Add(wff_btn, 0, wx.ALL, 3)
         sub_sizer.Add(clear_btn, 0, wx.ALL, 3)
 
-        self.ed = wx.TextCtrl(self,  # Win32 neews TE_RICH2 for color
+        self.ed = wx.TextCtrl(self,  # Win32 needs TE_RICH2 for color
                               style=wx.TE_MULTILINE|wx.HSCROLL|wx.TE_RICH2)
         if Win32():
             self.ed.Bind(wx.EVT_CHAR, self.on_char, self.ed)  # bad on Mac()
